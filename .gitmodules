@@ -1,0 +1,3 @@
+[submodule "src/quickstarts"]
+	path = src/quickstarts
+	url = git@github.com:wildfly-swarm/wildfly-swarm-examples.git
