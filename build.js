@@ -75,7 +75,26 @@ function build() {
           metadata: {
             name: "Configuration Options"
           }
+        },
+        management: {
+          sortBy: 'date',
+          metadata: {
+            name: "Monitoring & Management"
+          }
+        },
+        rest: {
+          sortBy: 'date',
+          metadata: {
+            name: "REST & HTTP"
+          }
+        },
+        assorted: {
+          sortBy: 'date',
+          metadata: {
+            name: "Other Topics"
+          }
         }
+
       }))
 
     .use(filepath({

@@ -13,17 +13,16 @@
     </div>
     <div class="col-lg-4">
         <div class="panel panel-primary" style="margin-top:20px">
-          <div class="panel-heading">Sources for this example</div>
+          <div class="panel-heading">Source code</div>
           <div class="panel-body">
-            <i class="fa fa-github" aria-hidden="true" style="font-size:30px"></i> <a href="https://github.com/wildfly-swarm/wildfly-swarm-examples/tree/master/{{ module }}">Github Repository</a>
+            <i class="fa fa-github" aria-hidden="true" style="font-size:30px;vertical-align:middle"></i> <a href="https://github.com/wildfly-swarm/wildfly-swarm-examples/tree/master/{{ module }}">Github Repository</a>
           </div>
         </div>
 
         <div class="panel panel-default">
-          <div class="panel-heading">Problems?</div>
+          <div class="panel-heading">Getting help</div>
           <div class="panel-body">
-          Please raise any issues found with this example in our JIRA:
-          https://issues.jboss.org/browse/SWARM
+          <i class="fa fa-question-circle-o" aria-hidden="true" style="font-size:30px;vertical-align:middle"></i> For any problem found using this example, please raise an issue <a href="https://issues.jboss.org/browse/SWARM">in our JIRA</a>
           </div>
         </div>
 
