@@ -1,0 +1,40 @@
+{
+  "name": "wildfly-swarm.io",
+  "version": "1.0.0",
+  "description": "Website for WildFly Swarm",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lance Ball <lanceball@gmail.com> (http://lanceball.com)",
+  "license": "Apache 2",
+  "dependencies": {
+    "gh-pages": "^0.5.0",
+    "jade": "^1.11.0",
+    "metalsmith": "^2.1.0",
+    "handlebars": "4.0.5",
+    "metalsmith-matters":"1.2.0",
+    "metalsmith-register-partials":"1.0.2",
+    "metalsmith-in-place": "1.4.3",
+    "metalsmith-asciidoc": "git://github.com/projectodd/metalsmith-asciidoc.git",
+    "metalsmith-branch": "0.0.4",
+    "metalsmith-collections": "^0.7.0",
+    "metalsmith-pagination": "1.4.0",
+    "metalsmith-drafts": "0.0.1",
+    "metalsmith-gist": "^0.3.0",
+    "metalsmith-if": "^0.1.1",
+    "metalsmith-layouts": "^1.6.4",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-permalinks": "^0.4.0",
+    "metalsmith-redirect": "^1.1.0",
+    "metalsmith-serve": "0.0.4",
+    "metalsmith-watcher": "^0.1.2",
+    "moment": "^2.10.6",
+    "then-jade": "^2.4.1",
+    "metalsmith-filepath":"1.0.1",
+    "metalsmith-better-excerpts":"0.1.7",
+    "metalsmith-headings":"0.1.0",
+    "metalsmith-include-content":"1.0.1",
+    "metalsmith-paths":"2.1.2"
+  }
+}

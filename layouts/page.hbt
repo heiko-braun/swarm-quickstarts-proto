@@ -1,0 +1,45 @@
+
+{{> header }}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      {{#if title}}
+        <h1>{{ title }}</h1>
+      {{/if}}
+
+      {{{ contents }}}
+
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-primary" style="margin-top:20px">
+          <div class="panel-heading">Sources for this example</div>
+          <div class="panel-body">
+            <i class="fa fa-github" aria-hidden="true" style="font-size:30px"></i> <a href="https://github.com/wildfly-swarm/wildfly-swarm-examples/tree/master/{{ module }}">Github Repository</a>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Problems?</div>
+          <div class="panel-body">
+          Please raise any issues found with this example in our JIRA:
+          https://issues.jboss.org/browse/SWARM
+          </div>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Table of Contents</div>
+
+            <ul class="list-group">
+            {{#each this.headings}}
+               <li class="list-group-item"><a href="#{{this.id}}">{{text}}</a></li>
+            {{/each}}
+          </ul>
+
+        </div>
+   </div>
+ </div>
+</div>
+
+{{> footer }}

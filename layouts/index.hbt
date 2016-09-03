@@ -1,0 +1,18 @@
+{{> header }}
+
+<ul>
+  {{#each collections}}
+    <li><a href="{{this.metadata.link}}">{{this.metadata.name}}</a>
+      <ul>
+       {{#this}}
+        <li><a href="/{{path.dir}}/{{path.name}}.html">{{title}}</a>
+          <p>
+          {{excerpt}}
+          </p>
+        </li>
+      {{/this}}
+      </ul>
+  {{/each}}
+</ul>
+
+{{> footer }}

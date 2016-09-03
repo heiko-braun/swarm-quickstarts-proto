@@ -1,0 +1,66 @@
+= Infinispan
+
+The Infinispan subsystem provides high-performance, clustered, transactional caching. For example, in a clustered web application, client session identifiers and/or data may need to be replicated across all nodes in the cluster. The failure of a session-oriented HTTP request requires that client session data is available on the new failover node. 
+
+== Including Infinispan Capabilities
+To use the Infinispan fraction, just add it to your `pom.xml`.
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wildfly.swarm</groupId>
+  <artifactId>infinispan</artifactId>
+</dependency>
+----
+
+By default, the Infinispan fraction is configured with four cache containers.
+
+|===
+|                     | *Container Name* | *Cache Names* |*Cache Types* | *Cache Modes*
+| *Default Container* | `server` |  `default` |replicated | `SYNC`
+| *Web Container* | `web` | `dist` | distributed | `ASYNC`
+| *EJB Container* | `ejb` | `dist` | distributed | `ASYNC`
+| *Hibernate Container* | `hibernate` | `local-query`, `entity`, `timestamps` | local, invalidation, replicated | default, `SYNC`, `ASYNC`
+|===
+
+== Customizing the Infinispan Configuration
+
+To customize the configuration of your Infinispan fraction, you may use the http://wildfly-swarm.github.io/wildfly-config-api/[configuration API] in a `main()` method. For example:
+
+[source,java]
+----
+public class Main {
+
+  public static void main(String...args) {
+
+    // Configure a cache container using the wildfly
+    // swarm configuration API
+    CacheContainer webCache = new CacheContainer("web")
+        .defaultCache("dist")
+        .jgroupsTransport(new JGroupsTransport().lockTimeout(60000L))
+        .distributedCache("dist", distCache -> distCache
+            .mode("ASYNC")
+            .l1Lifespan(0L)
+            .owners(2)
+            .lockingComponent(new LockingComponent().isolation("REPEATABLE_READ"))
+            .transactionComponent(new TransactionComponent().mode("BATCH"))
+            .fileStore(new FileStore()));
+    
+    // Create a new fraction, and add the cache container.
+    // Using the default ctor to create a new InfinispanFraction
+    // will provide no default caches.
+    InfinispanFraction fraction = new InfinispanFraction();
+    fraction.cacheContainer( webCache );
+
+    // Instantiate the swarm container and add our fraction
+    Container container = new Container();
+    container.fraction( fraction );
+    
+    // Start the container
+    container.start();
+  }
+  
+}
+----
+
+Infinispan is a fairly complex caching system with plenty of knobs and buttons for programmers and administrators to twiddle. For more information on Infinispan and how its runtime configuration may be customized, please also see the https://docs.jboss.org/author/display/WFLY9/Infinispan+Subsystem[WildFly documentation] and the official http://infinispan.org/documentation/[Infinispan Documentation].

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ title }} | WildFly Swarm Documentation</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="/css/asciidoc.css" media="screen" rel="stylesheet"/>
+</head>
+<body>
+
+<article>
+    <ul>
+        {{#each collections.Advanced}}
+            <li>
+
+                <a href="{{this.link}}"><h3>{{this.title}}</h3></a>
+                <p>{{this.excerpt}}</p>
+            </li>
+        {{/each}}
+    </ul>
+</article>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ title }} | WildFly Swarm Documentation</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="/css/asciidoc.css" media="screen" rel="stylesheet"/>
+    <link href="/css/site.css" media="screen" rel="stylesheet"/>
+</head>
+<body>
+
+
+  <div class="container">
+       <div class="row">
+         <!-- TOC -->
+         <div id="toc" class="col-sm-3 sidebar">
+           <div id="toctitle">Table of Contents</div>
+           <ul class="nav nav-sidebar sectlevel1">
+               {{#each collections.GetStarted}}
+                 <li>
+                     <a href="#_{{@key}}">{{this.title}}</a>
+                </li>
+                <li>
+                     <ul class="sectlevel2">
+                     {{#each this.headings}}
+                        <li><a href="#{{this.id}}">{{text}}</a></li>
+                     {{/each}}
+                   </ul>
+                </li>
+              {{/each}}
+           </ul>
+
+         </div>
+
+         <!-- Contents -->
+         <div class="col-sm-9 main">
+            <h1 class="page-header">{{this.title}}</h1>
+            <article>
+                  {{#each collections.GetStarted}}
+                        <h1 id="_{{@key}}" class="page-header">{{this.title}}</h1>
+
+                          <a href="#top">[Top]</a><br/>
+
+                          {{{this.contents}}}
+
+                  {{/each}}
+            </article>
+        </div>
+     </div>
+   </div>
+
+
+
+</body>
+</html>

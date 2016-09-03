@@ -1,0 +1,83 @@
+= Swagger
+
+== Introduction
+Swagger is a formal specification for a language-agnostic interface to REST APIs. This interface lets both humans and computers understand an API's capabilities such that a consumer of the API can interact with the service. In simple terms, swagger is a JSON representation of a RESTful API, typically made available over HTTP at `/swagger.json`.
+
+A simple `swagger.json` will look something like this.
+
+[source,json]
+----
+{
+    "swagger":"2.0",
+    "info":{},
+    "basePath":"/",
+    "tags":[{"name":"time"}],
+    "paths":{
+        "/time/now":{
+            "get":{
+                "tags":["time"],
+                "summary":"Get the current time",
+                "description":"Returns the time as a string",
+                "operationId":"get",
+                "produces":["application/json"],
+                "parameters":[],
+                "responses":{
+                    "200":{
+                        "description":"successful operation",
+                        "schema":{"type":"string"}
+                    }
+                }
+            }
+        }
+    }
+}
+----
+
+WildFly Swarm provides a `swagger` fraction that enables JAX-RS API developers to easily publish a `/swagger.json` describing the API.
+
+To learn more about Swagger's capabilities, see the http://swagger.io/[Swagger website].
+
+== Configuration
+To enable Swagger in your application, you need to add a dependency to your `pom.xml`.
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wildfly.swarm</groupId>
+  <artifactId>swagger</artifactId>
+</dependency>
+----
+
+== Usage
+The `swagger` fraction pulls in required dependencies, and when your application is deployed, the underlying Swagger system is automatically configured and initialized.
+
+By default, `swagger` can be used with zero-configuration. This means you can simply include the `swagger` fraction in the POM file for your application, and WildFly Swarm will figure out reasonable defaults. However, if you would like to customize the configuration, this is possible using ShrinkWrap and `SwaggerArchive`. Configure this in the `main()` method for your application.
+
+[source,java]
+----
+    public static void main(String[] args) throws Exception {
+
+        Container container = new Container();
+
+        JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class, "swagger-app.war");
+        deployment.addClass(TimeResource.class);
+
+        // Enable the swagger bits
+        SwaggerArchive archive = deployment.as(SwaggerArchive.class);
+        // Tell swagger where our resources are
+        archive.setResourcePackages("org.wildfly.swarm.examples");
+        archive.setTitle('My Awesome Application');
+
+        deployment.addAllDependencies();
+        container
+                .fraction(LoggingFraction.createDefaultLoggingFraction())
+                .start()
+                .deploy(deployment);
+    }
+}
+----
+
+The packages are recursively scanned, so if you have a package heirarchy, you just need to set the top level package name. See the https://github.com/wildfly-swarm/wildfly-swarm/blob/master/swagger/api/src/main/java/org/wildfly/swarm/swagger/SwaggerArchive.java[`SwaggerArchive`] interface for additional configuration options.
+
+== Swagger UI
+The folks over at http://swagger.io have also created an HTML5/JavaScript application for querying and interacting with swagger-enabled REST APIs. WildFly Swarm provides a simple way to deploy this application using the Swagger-UI server. See the <<fake/../../servers.adoc#,Servers>> documentation for more information.
