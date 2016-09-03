@@ -1,0 +1,34 @@
+---
+layout: page.hbt
+title: A name for the quickstart
+module: link to the github module (relative to examples root)
+collection: assorted
+---
+
+The first paragraph is used as an excerpt on the quickstart font page.
+
+== A headline that will show up in the TOC
+
+The project is a normal maven project with `jar` packaging, not `war`.
+
+[source,xml]
+----
+some XML source
+----
+
+The project adds a `<plugin>` to configure `wildfly-swarm-plugin` to
+create the runnable `.jar`.
+
+== Another headline that will show up in the TOC
+
+[source,xml]
+----
+<plugin>
+  <groupId>org.wildfly.swarm</groupId>
+  <artifactId>wildfly-swarm-plugin</artifactId>
+  <configuration>
+    <mainClass>org.wildfly.swarm.examples.ds.deployment.Main</mainClass>
+  </configuration>
+  ...
+</plugin>
+----
